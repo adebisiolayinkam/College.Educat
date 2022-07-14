@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce5d5204c1044839924516234ef87116" Name="Diagram1">
+        <EntityTypeShape EntityType="CollegeEducatModel.Arm" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.class" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.commentsonresult" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.currentsession" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.grade" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.parent" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.schoolsetup" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.state" Width="1.5" PointX="2.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.student" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.studentsubjectregistrationandresult" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CollegeEducatModel.subject" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <AssociationConnector Association="CollegeEducatModel.FK_students_Arms" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.FK_students_classes" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.FK_commentsonresults_students" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.FK_commentsonresults_subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.FK_currentsession_schoolsetup" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.FK_students_parents" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.FK_studentsubjectregistrationandresult_students" ManuallyRouted="false" />
+        <AssociationConnector Association="CollegeEducatModel.classessubjects" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,862 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CollegeEducatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="armname" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="classes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="classname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nextclass" Type="int" Nullable="false" />
+          <Property Name="classtype" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="schoolid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="classessubjects">
+          <Key>
+            <PropertyRef Name="classid" />
+            <PropertyRef Name="subjectid" />
+          </Key>
+          <Property Name="classid" Type="int" Nullable="false" />
+          <Property Name="subjectid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="commentsonresults">
+          <Key>
+            <PropertyRef Name="studentid" />
+            <PropertyRef Name="subjectid" />
+            <PropertyRef Name="session" />
+            <PropertyRef Name="term" />
+          </Key>
+          <Property Name="studentid" Type="bigint" Nullable="false" />
+          <Property Name="subjectid" Type="int" Nullable="false" />
+          <Property Name="session" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="term" Type="int" Nullable="false" />
+          <Property Name="classteachercomments" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="principalscomment" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="noofattendance" Type="int" Nullable="false" />
+          <Property Name="percentagescore" Type="float" Nullable="false" />
+          <Property Name="cumulativeaverage" Type="float" Nullable="false" />
+          <Property Name="pryschomotorsports" Type="tinyint" Nullable="false" />
+          <Property Name="pryschomotorhandwritingskills" Type="tinyint" Nullable="false" />
+          <Property Name="pryschomotorhandriting" Type="tinyint" Nullable="false" />
+          <Property Name="pryschomotorverbalfluency" Type="tinyint" Nullable="false" />
+          <Property Name="pryschomotorsgames" Type="tinyint" Nullable="false" />
+          <Property Name="pryschomotordrawingandpainting" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareapunctuality" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareaneatness" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareapoliteness" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareahonesty" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareacooperationwithothers" Type="tinyint" Nullable="false" />
+          <Property Name="affectivearealeadership" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareahelpingothers" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareaemotionalstability" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareahealth" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareaattitudetoschoolwork" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareaattentiveness" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareaperseverance" Type="tinyint" Nullable="false" />
+          <Property Name="affectiveareaspeakinganfhandwriting" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="currentsession">
+          <Key>
+            <PropertyRef Name="sessionname" />
+            <PropertyRef Name="term" />
+          </Key>
+          <Property Name="sessionname" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="term" Type="int" Nullable="false" />
+          <Property Name="nexttermbegins" Type="smalldatetime" Nullable="false" />
+          <Property Name="nooftimesschoolopens" Type="int" Nullable="false" />
+          <Property Name="isOpened" Type="bit" Nullable="false" />
+          <Property Name="schoolid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grades">
+          <Key>
+            <PropertyRef Name="grade" />
+          </Key>
+          <Property Name="highscore" Type="float" Nullable="false" />
+          <Property Name="lowscore" Type="float" Nullable="false" />
+          <Property Name="grade" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="parents">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentNames" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="parentphoneno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="parentemailaddress" Type="varchar" MaxLength="150" />
+          <Property Name="homeaddress" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="state" Type="int" Nullable="false" />
+          <Property Name="alternativephoneno" Type="varchar" MaxLength="50" />
+          <Property Name="schoolid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schoolsetup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="schoolname" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="locationaddress" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="logo" Type="image" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="250" />
+          <Property Name="phoneno" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="currentsession" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="currentterm" Type="int" Nullable="false" />
+          <Property Name="schoolshortname" Type="varchar" MaxLength="50" />
+          <Property Name="cascore" Type="float" Nullable="false" />
+          <Property Name="examscore" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="states">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statename" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="othername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="dob" Type="smalldatetime" Nullable="false" />
+          <Property Name="currentclassId" Type="int" Nullable="false" />
+          <Property Name="currentsession" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="currentterm" Type="int" Nullable="false" />
+          <Property Name="armId" Type="int" Nullable="false" />
+          <Property Name="guardiannames" Type="varchar" MaxLength="250" />
+          <Property Name="guardianphoneno" Type="varchar" MaxLength="50" />
+          <Property Name="guardianemail" Type="varchar" MaxLength="150" />
+          <Property Name="homeaddress" Type="varchar" MaxLength="500" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="int" />
+          <Property Name="yearofentry" Type="int" Nullable="false" />
+          <Property Name="graduated" Type="bit" Nullable="false" />
+          <Property Name="yearofgraduation" Type="int" Nullable="false" />
+          <Property Name="picture" Type="image" />
+          <Property Name="parentid" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="studentsubjectregistrationandresult">
+          <Key>
+            <PropertyRef Name="studentid" />
+            <PropertyRef Name="subjectid" />
+            <PropertyRef Name="session" />
+            <PropertyRef Name="term" />
+          </Key>
+          <Property Name="studentid" Type="bigint" Nullable="false" />
+          <Property Name="subjectid" Type="int" Nullable="false" />
+          <Property Name="session" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="term" Type="int" Nullable="false" />
+          <Property Name="ca" Type="float" Nullable="false" />
+          <Property Name="ca2" Type="float" Nullable="false" />
+          <Property Name="exam" Type="float" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="classaverage" Type="float" Nullable="false" />
+          <Property Name="teacherscomment" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subjectname" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_classessubjects_classes">
+          <End Role="classes" Type="Self.classes" Multiplicity="1" />
+          <End Role="classessubjects" Type="Self.classessubjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="classessubjects">
+              <PropertyRef Name="classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_classessubjects_subjects">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1" />
+          <End Role="classessubjects" Type="Self.classessubjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="classessubjects">
+              <PropertyRef Name="subjectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentsonresults_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="commentsonresults" Type="Self.commentsonresults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="commentsonresults">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentsonresults_subjects">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1" />
+          <End Role="commentsonresults" Type="Self.commentsonresults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="commentsonresults">
+              <PropertyRef Name="subjectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_currentsession_schoolsetup">
+          <End Role="schoolsetup" Type="Self.schoolsetup" Multiplicity="1" />
+          <End Role="currentsession" Type="Self.currentsession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schoolsetup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="currentsession">
+              <PropertyRef Name="schoolid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_Arms">
+          <End Role="Arms" Type="Self.Arms" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="armId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_classes">
+          <End Role="classes" Type="Self.classes" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="currentclassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_parents">
+          <End Role="parents" Type="Self.parents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parents">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="parentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_studentsubjectregistrationandresult_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="studentsubjectregistrationandresult" Type="Self.studentsubjectregistrationandresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="studentsubjectregistrationandresult">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CollegeEducatModelStoreContainer">
+          <EntitySet Name="Arms" EntityType="Self.Arms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="classes" EntityType="Self.classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="classessubjects" EntityType="Self.classessubjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="commentsonresults" EntityType="Self.commentsonresults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="currentsession" EntityType="Self.currentsession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grades" EntityType="Self.grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parents" EntityType="Self.parents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schoolsetup" EntityType="Self.schoolsetup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="states" EntityType="Self.states" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="studentsubjectregistrationandresult" EntityType="Self.studentsubjectregistrationandresult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subjects" EntityType="Self.subjects" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_classessubjects_classes" Association="Self.FK_classessubjects_classes">
+            <End Role="classes" EntitySet="classes" />
+            <End Role="classessubjects" EntitySet="classessubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_classessubjects_subjects" Association="Self.FK_classessubjects_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="classessubjects" EntitySet="classessubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentsonresults_students" Association="Self.FK_commentsonresults_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="commentsonresults" EntitySet="commentsonresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentsonresults_subjects" Association="Self.FK_commentsonresults_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="commentsonresults" EntitySet="commentsonresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_currentsession_schoolsetup" Association="Self.FK_currentsession_schoolsetup">
+            <End Role="schoolsetup" EntitySet="schoolsetup" />
+            <End Role="currentsession" EntitySet="currentsession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_Arms" Association="Self.FK_students_Arms">
+            <End Role="Arms" EntitySet="Arms" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_classes" Association="Self.FK_students_classes">
+            <End Role="classes" EntitySet="classes" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_parents" Association="Self.FK_students_parents">
+            <End Role="parents" EntitySet="parents" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_studentsubjectregistrationandresult_students" Association="Self.FK_studentsubjectregistrationandresult_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="studentsubjectregistrationandresult" EntitySet="studentsubjectregistrationandresult" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CollegeEducatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="armname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="students" Relationship="Self.FK_students_Arms" FromRole="Arms" ToRole="students" />
+        </EntityType>
+        <EntityType Name="class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="classname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nextclass" Type="Int32" Nullable="false" />
+          <Property Name="classtype" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="schoolid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="students" Relationship="Self.FK_students_classes" FromRole="classes" ToRole="students" />
+          <NavigationProperty Name="subjects" Relationship="Self.classessubjects" FromRole="classes" ToRole="subjects" />
+        </EntityType>
+        <EntityType Name="commentsonresult">
+          <Key>
+            <PropertyRef Name="studentid" />
+            <PropertyRef Name="subjectid" />
+            <PropertyRef Name="session" />
+            <PropertyRef Name="term" />
+          </Key>
+          <Property Name="studentid" Type="Int64" Nullable="false" />
+          <Property Name="subjectid" Type="Int32" Nullable="false" />
+          <Property Name="session" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="term" Type="Int32" Nullable="false" />
+          <Property Name="classteachercomments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="principalscomment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="noofattendance" Type="Int32" Nullable="false" />
+          <Property Name="percentagescore" Type="Double" Nullable="false" />
+          <Property Name="cumulativeaverage" Type="Double" Nullable="false" />
+          <Property Name="pryschomotorsports" Type="Byte" Nullable="false" />
+          <Property Name="pryschomotorhandwritingskills" Type="Byte" Nullable="false" />
+          <Property Name="pryschomotorhandriting" Type="Byte" Nullable="false" />
+          <Property Name="pryschomotorverbalfluency" Type="Byte" Nullable="false" />
+          <Property Name="pryschomotorsgames" Type="Byte" Nullable="false" />
+          <Property Name="pryschomotordrawingandpainting" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareapunctuality" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareaneatness" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareapoliteness" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareahonesty" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareacooperationwithothers" Type="Byte" Nullable="false" />
+          <Property Name="affectivearealeadership" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareahelpingothers" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareaemotionalstability" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareahealth" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareaattitudetoschoolwork" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareaattentiveness" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareaperseverance" Type="Byte" Nullable="false" />
+          <Property Name="affectiveareaspeakinganfhandwriting" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="student" Relationship="Self.FK_commentsonresults_students" FromRole="commentsonresults" ToRole="students" />
+          <NavigationProperty Name="subject" Relationship="Self.FK_commentsonresults_subjects" FromRole="commentsonresults" ToRole="subjects" />
+        </EntityType>
+        <EntityType Name="currentsession">
+          <Key>
+            <PropertyRef Name="sessionname" />
+            <PropertyRef Name="term" />
+          </Key>
+          <Property Name="sessionname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="term" Type="Int32" Nullable="false" />
+          <Property Name="nexttermbegins" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="nooftimesschoolopens" Type="Int32" Nullable="false" />
+          <Property Name="isOpened" Type="Boolean" Nullable="false" />
+          <Property Name="schoolid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="schoolsetup" Relationship="Self.FK_currentsession_schoolsetup" FromRole="currentsession" ToRole="schoolsetup" />
+        </EntityType>
+        <EntityType Name="grade">
+          <Key>
+            <PropertyRef Name="grade1" />
+          </Key>
+          <Property Name="highscore" Type="Double" Nullable="false" />
+          <Property Name="lowscore" Type="Double" Nullable="false" />
+          <Property Name="grade1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="parent">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentNames" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parentphoneno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parentemailaddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="homeaddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <Property Name="alternativephoneno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="schoolid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="students" Relationship="Self.FK_students_parents" FromRole="parents" ToRole="students" />
+        </EntityType>
+        <EntityType Name="schoolsetup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="schoolname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="locationaddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="logo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="phoneno" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currentsession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currentterm" Type="Int32" Nullable="false" />
+          <Property Name="schoolshortname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cascore" Type="Double" Nullable="false" />
+          <Property Name="examscore" Type="Double" Nullable="false" />
+          <NavigationProperty Name="currentsessions" Relationship="Self.FK_currentsession_schoolsetup" FromRole="schoolsetup" ToRole="currentsession" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="othername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="currentclassId" Type="Int32" Nullable="false" />
+          <Property Name="currentsession" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currentterm" Type="Int32" Nullable="false" />
+          <Property Name="armId" Type="Int32" Nullable="false" />
+          <Property Name="guardiannames" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="guardianphoneno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="guardianemail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="homeaddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="yearofentry" Type="Int32" Nullable="false" />
+          <Property Name="graduated" Type="Boolean" Nullable="false" />
+          <Property Name="yearofgraduation" Type="Int32" Nullable="false" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="parentid" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Arm" Relationship="Self.FK_students_Arms" FromRole="students" ToRole="Arms" />
+          <NavigationProperty Name="class" Relationship="Self.FK_students_classes" FromRole="students" ToRole="classes" />
+          <NavigationProperty Name="commentsonresults" Relationship="Self.FK_commentsonresults_students" FromRole="students" ToRole="commentsonresults" />
+          <NavigationProperty Name="parent" Relationship="Self.FK_students_parents" FromRole="students" ToRole="parents" />
+          <NavigationProperty Name="studentsubjectregistrationandresults" Relationship="Self.FK_studentsubjectregistrationandresult_students" FromRole="students" ToRole="studentsubjectregistrationandresult" />
+        </EntityType>
+        <EntityType Name="studentsubjectregistrationandresult">
+          <Key>
+            <PropertyRef Name="studentid" />
+            <PropertyRef Name="subjectid" />
+            <PropertyRef Name="session" />
+            <PropertyRef Name="term" />
+          </Key>
+          <Property Name="studentid" Type="Int64" Nullable="false" />
+          <Property Name="subjectid" Type="Int32" Nullable="false" />
+          <Property Name="session" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="term" Type="Int32" Nullable="false" />
+          <Property Name="ca" Type="Double" Nullable="false" />
+          <Property Name="ca2" Type="Double" Nullable="false" />
+          <Property Name="exam" Type="Double" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="classaverage" Type="Double" Nullable="false" />
+          <Property Name="teacherscomment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="student" Relationship="Self.FK_studentsubjectregistrationandresult_students" FromRole="studentsubjectregistrationandresult" ToRole="students" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subjectname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="commentsonresults" Relationship="Self.FK_commentsonresults_subjects" FromRole="subjects" ToRole="commentsonresults" />
+          <NavigationProperty Name="classes" Relationship="Self.classessubjects" FromRole="subjects" ToRole="classes" />
+        </EntityType>
+        <Association Name="FK_students_Arms">
+          <End Role="Arms" Type="Self.Arm" Multiplicity="1" />
+          <End Role="students" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="armId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_classes">
+          <End Role="classes" Type="Self.class" Multiplicity="1" />
+          <End Role="students" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="currentclassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentsonresults_students">
+          <End Role="students" Type="Self.student" Multiplicity="1" />
+          <End Role="commentsonresults" Type="Self.commentsonresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="commentsonresults">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentsonresults_subjects">
+          <End Role="subjects" Type="Self.subject" Multiplicity="1" />
+          <End Role="commentsonresults" Type="Self.commentsonresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="commentsonresults">
+              <PropertyRef Name="subjectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_currentsession_schoolsetup">
+          <End Role="schoolsetup" Type="Self.schoolsetup" Multiplicity="1" />
+          <End Role="currentsession" Type="Self.currentsession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schoolsetup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="currentsession">
+              <PropertyRef Name="schoolid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_parents">
+          <End Role="parents" Type="Self.parent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="students" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parents">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="parentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_studentsubjectregistrationandresult_students">
+          <End Role="students" Type="Self.student" Multiplicity="1" />
+          <End Role="studentsubjectregistrationandresult" Type="Self.studentsubjectregistrationandresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="studentsubjectregistrationandresult">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="classessubjects">
+          <End Role="classes" Type="Self.class" Multiplicity="*" />
+          <End Role="subjects" Type="Self.subject" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EducatContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Arms" EntityType="Self.Arm" />
+          <EntitySet Name="classes" EntityType="Self.class" />
+          <EntitySet Name="commentsonresults" EntityType="Self.commentsonresult" />
+          <EntitySet Name="currentsessions" EntityType="Self.currentsession" />
+          <EntitySet Name="grades" EntityType="Self.grade" />
+          <EntitySet Name="parents" EntityType="Self.parent" />
+          <EntitySet Name="schoolsetups" EntityType="Self.schoolsetup" />
+          <EntitySet Name="states" EntityType="Self.state" />
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="studentsubjectregistrationandresults" EntityType="Self.studentsubjectregistrationandresult" />
+          <EntitySet Name="subjects" EntityType="Self.subject" />
+          <AssociationSet Name="FK_students_Arms" Association="Self.FK_students_Arms">
+            <End Role="Arms" EntitySet="Arms" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_classes" Association="Self.FK_students_classes">
+            <End Role="classes" EntitySet="classes" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentsonresults_students" Association="Self.FK_commentsonresults_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="commentsonresults" EntitySet="commentsonresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentsonresults_subjects" Association="Self.FK_commentsonresults_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="commentsonresults" EntitySet="commentsonresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_currentsession_schoolsetup" Association="Self.FK_currentsession_schoolsetup">
+            <End Role="schoolsetup" EntitySet="schoolsetups" />
+            <End Role="currentsession" EntitySet="currentsessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_students_parents" Association="Self.FK_students_parents">
+            <End Role="parents" EntitySet="parents" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_studentsubjectregistrationandresult_students" Association="Self.FK_studentsubjectregistrationandresult_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="studentsubjectregistrationandresult" EntitySet="studentsubjectregistrationandresults" />
+          </AssociationSet>
+          <AssociationSet Name="classessubjects" Association="Self.classessubjects">
+            <End Role="classes" EntitySet="classes" />
+            <End Role="subjects" EntitySet="subjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CollegeEducatModelStoreContainer" CdmEntityContainer="EducatContext">
+          <EntitySetMapping Name="Arms">
+            <EntityTypeMapping TypeName="CollegeEducatModel.Arm">
+              <MappingFragment StoreEntitySet="Arms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="armname" ColumnName="armname" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="classes">
+            <EntityTypeMapping TypeName="CollegeEducatModel.class">
+              <MappingFragment StoreEntitySet="classes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="classname" ColumnName="classname" />
+                <ScalarProperty Name="nextclass" ColumnName="nextclass" />
+                <ScalarProperty Name="classtype" ColumnName="classtype" />
+                <ScalarProperty Name="schoolid" ColumnName="schoolid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="commentsonresults">
+            <EntityTypeMapping TypeName="CollegeEducatModel.commentsonresult">
+              <MappingFragment StoreEntitySet="commentsonresults">
+                <ScalarProperty Name="studentid" ColumnName="studentid" />
+                <ScalarProperty Name="subjectid" ColumnName="subjectid" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="classteachercomments" ColumnName="classteachercomments" />
+                <ScalarProperty Name="principalscomment" ColumnName="principalscomment" />
+                <ScalarProperty Name="noofattendance" ColumnName="noofattendance" />
+                <ScalarProperty Name="percentagescore" ColumnName="percentagescore" />
+                <ScalarProperty Name="cumulativeaverage" ColumnName="cumulativeaverage" />
+                <ScalarProperty Name="pryschomotorsports" ColumnName="pryschomotorsports" />
+                <ScalarProperty Name="pryschomotorhandwritingskills" ColumnName="pryschomotorhandwritingskills" />
+                <ScalarProperty Name="pryschomotorhandriting" ColumnName="pryschomotorhandriting" />
+                <ScalarProperty Name="pryschomotorverbalfluency" ColumnName="pryschomotorverbalfluency" />
+                <ScalarProperty Name="pryschomotorsgames" ColumnName="pryschomotorsgames" />
+                <ScalarProperty Name="pryschomotordrawingandpainting" ColumnName="pryschomotordrawingandpainting" />
+                <ScalarProperty Name="affectiveareapunctuality" ColumnName="affectiveareapunctuality" />
+                <ScalarProperty Name="affectiveareaneatness" ColumnName="affectiveareaneatness" />
+                <ScalarProperty Name="affectiveareapoliteness" ColumnName="affectiveareapoliteness" />
+                <ScalarProperty Name="affectiveareahonesty" ColumnName="affectiveareahonesty" />
+                <ScalarProperty Name="affectiveareacooperationwithothers" ColumnName="affectiveareacooperationwithothers" />
+                <ScalarProperty Name="affectivearealeadership" ColumnName="affectivearealeadership" />
+                <ScalarProperty Name="affectiveareahelpingothers" ColumnName="affectiveareahelpingothers" />
+                <ScalarProperty Name="affectiveareaemotionalstability" ColumnName="affectiveareaemotionalstability" />
+                <ScalarProperty Name="affectiveareahealth" ColumnName="affectiveareahealth" />
+                <ScalarProperty Name="affectiveareaattitudetoschoolwork" ColumnName="affectiveareaattitudetoschoolwork" />
+                <ScalarProperty Name="affectiveareaattentiveness" ColumnName="affectiveareaattentiveness" />
+                <ScalarProperty Name="affectiveareaperseverance" ColumnName="affectiveareaperseverance" />
+                <ScalarProperty Name="affectiveareaspeakinganfhandwriting" ColumnName="affectiveareaspeakinganfhandwriting" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="currentsessions">
+            <EntityTypeMapping TypeName="CollegeEducatModel.currentsession">
+              <MappingFragment StoreEntitySet="currentsession">
+                <ScalarProperty Name="sessionname" ColumnName="sessionname" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="nexttermbegins" ColumnName="nexttermbegins" />
+                <ScalarProperty Name="nooftimesschoolopens" ColumnName="nooftimesschoolopens" />
+                <ScalarProperty Name="isOpened" ColumnName="isOpened" />
+                <ScalarProperty Name="schoolid" ColumnName="schoolid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grades">
+            <EntityTypeMapping TypeName="CollegeEducatModel.grade">
+              <MappingFragment StoreEntitySet="grades">
+                <ScalarProperty Name="highscore" ColumnName="highscore" />
+                <ScalarProperty Name="lowscore" ColumnName="lowscore" />
+                <ScalarProperty Name="grade1" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parents">
+            <EntityTypeMapping TypeName="CollegeEducatModel.parent">
+              <MappingFragment StoreEntitySet="parents">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ParentNames" ColumnName="ParentNames" />
+                <ScalarProperty Name="parentphoneno" ColumnName="parentphoneno" />
+                <ScalarProperty Name="parentemailaddress" ColumnName="parentemailaddress" />
+                <ScalarProperty Name="homeaddress" ColumnName="homeaddress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="alternativephoneno" ColumnName="alternativephoneno" />
+                <ScalarProperty Name="schoolid" ColumnName="schoolid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schoolsetups">
+            <EntityTypeMapping TypeName="CollegeEducatModel.schoolsetup">
+              <MappingFragment StoreEntitySet="schoolsetup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="schoolname" ColumnName="schoolname" />
+                <ScalarProperty Name="locationaddress" ColumnName="locationaddress" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneno" ColumnName="phoneno" />
+                <ScalarProperty Name="currentsession" ColumnName="currentsession" />
+                <ScalarProperty Name="currentterm" ColumnName="currentterm" />
+                <ScalarProperty Name="schoolshortname" ColumnName="schoolshortname" />
+                <ScalarProperty Name="cascore" ColumnName="cascore" />
+                <ScalarProperty Name="examscore" ColumnName="examscore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="states">
+            <EntityTypeMapping TypeName="CollegeEducatModel.state">
+              <MappingFragment StoreEntitySet="states">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="statename" ColumnName="statename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="CollegeEducatModel.student">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="othername" ColumnName="othername" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="currentclassId" ColumnName="currentclassId" />
+                <ScalarProperty Name="currentsession" ColumnName="currentsession" />
+                <ScalarProperty Name="currentterm" ColumnName="currentterm" />
+                <ScalarProperty Name="armId" ColumnName="armId" />
+                <ScalarProperty Name="guardiannames" ColumnName="guardiannames" />
+                <ScalarProperty Name="guardianphoneno" ColumnName="guardianphoneno" />
+                <ScalarProperty Name="guardianemail" ColumnName="guardianemail" />
+                <ScalarProperty Name="homeaddress" ColumnName="homeaddress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="yearofentry" ColumnName="yearofentry" />
+                <ScalarProperty Name="graduated" ColumnName="graduated" />
+                <ScalarProperty Name="yearofgraduation" ColumnName="yearofgraduation" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="studentsubjectregistrationandresults">
+            <EntityTypeMapping TypeName="CollegeEducatModel.studentsubjectregistrationandresult">
+              <MappingFragment StoreEntitySet="studentsubjectregistrationandresult">
+                <ScalarProperty Name="studentid" ColumnName="studentid" />
+                <ScalarProperty Name="subjectid" ColumnName="subjectid" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="ca" ColumnName="ca" />
+                <ScalarProperty Name="ca2" ColumnName="ca2" />
+                <ScalarProperty Name="exam" ColumnName="exam" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="classaverage" ColumnName="classaverage" />
+                <ScalarProperty Name="teacherscomment" ColumnName="teacherscomment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="CollegeEducatModel.subject">
+              <MappingFragment StoreEntitySet="subjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="subjectname" ColumnName="subjectname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="classessubjects" TypeName="CollegeEducatModel.classessubjects" StoreEntitySet="classessubjects">
+            <EndProperty Name="classes">
+              <ScalarProperty Name="Id" ColumnName="classid" />
+            </EndProperty>
+            <EndProperty Name="subjects">
+              <ScalarProperty Name="Id" ColumnName="subjectid" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
