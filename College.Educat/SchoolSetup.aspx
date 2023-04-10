@@ -159,8 +159,6 @@ function image_preview(e) {
                 </div>
 
 
-
-
                 <div class="col-md-3">
                     <div class="form-label-group">
                         <asp:TextBox ID="CascoreBox" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>

@@ -19,6 +19,7 @@ namespace College.Educat.admin
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             Validate();
+
             if (IsValid)
             {
                 string subject = Server.HtmlEncode(SubjectBox.Text);
@@ -35,7 +36,7 @@ namespace College.Educat.admin
                 {
                     db.SaveChanges();
 
-                    
+
                     Response.Redirect("ShowSubject");
 
                 }

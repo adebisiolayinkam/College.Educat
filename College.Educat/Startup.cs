@@ -13,7 +13,7 @@ namespace College.Educat
             ConfigureAuth(app);
             Task.Run(() => InitialiseMyAppAsync());
         }
-
+ 
         private async Task InitialiseMyAppAsync()
         {
             using (ApplicationDbContext context = new ApplicationDbContext())

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CollegeEducatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CollegeEducatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Arms">
           <Key>
             <PropertyRef Name="Id" />
@@ -116,6 +116,8 @@
           <Property Name="schoolshortname" Type="varchar" MaxLength="50" />
           <Property Name="cascore" Type="float" Nullable="false" />
           <Property Name="examscore" Type="float" Nullable="false" />
+          <Property Name="nexttimebegins" Type="datetime" Nullable="false" />
+          <Property Name="isOpened" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="states">
           <Key>
@@ -336,8 +338,7 @@
             <End Role="studentsubjectregistrationandresult" EntitySet="studentsubjectregistrationandresult" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CollegeEducatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -411,7 +412,7 @@
           <Property Name="nooftimesschoolopens" Type="Int32" Nullable="false" />
           <Property Name="isOpened" Type="Boolean" Nullable="false" />
           <Property Name="schoolid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="schoolsetup" Relationship="Self.FK_currentsession_schoolsetup" FromRole="currentsession" ToRole="schoolsetup" />
+          <NavigationProperty Name="schoolsetup" Relationship="CollegeEducatModel.FK_currentsession_schoolsetup" FromRole="currentsession" ToRole="schoolsetup" />
         </EntityType>
         <EntityType Name="grade">
           <Key>
@@ -435,23 +436,6 @@
           <Property Name="alternativephoneno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="schoolid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="students" Relationship="Self.FK_students_parents" FromRole="parents" ToRole="students" />
-        </EntityType>
-        <EntityType Name="schoolsetup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="schoolname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="locationaddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="logo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="phoneno" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="currentsession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="currentterm" Type="Int32" Nullable="false" />
-          <Property Name="schoolshortname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cascore" Type="Double" Nullable="false" />
-          <Property Name="examscore" Type="Double" Nullable="false" />
-          <NavigationProperty Name="currentsessions" Relationship="Self.FK_currentsession_schoolsetup" FromRole="schoolsetup" ToRole="currentsession" />
         </EntityType>
         <EntityType Name="state">
           <Key>
@@ -568,18 +552,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_currentsession_schoolsetup">
-          <End Role="schoolsetup" Type="Self.schoolsetup" Multiplicity="1" />
-          <End Role="currentsession" Type="Self.currentsession" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="schoolsetup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="currentsession">
-              <PropertyRef Name="schoolid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_students_parents">
           <End Role="parents" Type="Self.parent" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -617,7 +589,6 @@
           <EntitySet Name="currentsessions" EntityType="Self.currentsession" />
           <EntitySet Name="grades" EntityType="Self.grade" />
           <EntitySet Name="parents" EntityType="Self.parent" />
-          <EntitySet Name="schoolsetups" EntityType="Self.schoolsetup" />
           <EntitySet Name="states" EntityType="Self.state" />
           <EntitySet Name="students" EntityType="Self.student" />
           <EntitySet Name="studentsubjectregistrationandresults" EntityType="Self.studentsubjectregistrationandresult" />
@@ -638,10 +609,6 @@
             <End Role="subjects" EntitySet="subjects" />
             <End Role="commentsonresults" EntitySet="commentsonresults" />
           </AssociationSet>
-          <AssociationSet Name="FK_currentsession_schoolsetup" Association="Self.FK_currentsession_schoolsetup">
-            <End Role="schoolsetup" EntitySet="schoolsetups" />
-            <End Role="currentsession" EntitySet="currentsessions" />
-          </AssociationSet>
           <AssociationSet Name="FK_students_parents" Association="Self.FK_students_parents">
             <End Role="parents" EntitySet="parents" />
             <End Role="students" EntitySet="students" />
@@ -654,7 +621,43 @@
             <End Role="classes" EntitySet="classes" />
             <End Role="subjects" EntitySet="subjects" />
           </AssociationSet>
+          <EntitySet Name="schoolsetups" EntityType="CollegeEducatModel.schoolsetup" />
+          <AssociationSet Name="FK_currentsession_schoolsetup" Association="CollegeEducatModel.FK_currentsession_schoolsetup">
+            <End Role="schoolsetup" EntitySet="schoolsetups" />
+            <End Role="currentsession" EntitySet="currentsessions" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="schoolsetup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="schoolname" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="locationaddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="logo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="phoneno" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="currentsession" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="currentterm" Type="Int32" Nullable="false" />
+          <Property Name="schoolshortname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cascore" Type="Double" Nullable="false" />
+          <Property Name="examscore" Type="Double" Nullable="false" />
+          <Property Name="nexttimebegins" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isOpened" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="currentsessions" Relationship="CollegeEducatModel.FK_currentsession_schoolsetup" FromRole="schoolsetup" ToRole="currentsession" />
+        </EntityType>
+        <Association Name="FK_currentsession_schoolsetup">
+          <End Type="CollegeEducatModel.schoolsetup" Role="schoolsetup" Multiplicity="1" />
+          <End Type="CollegeEducatModel.currentsession" Role="currentsession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schoolsetup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="currentsession">
+              <PropertyRef Name="schoolid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -751,23 +754,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="schoolsetups">
-            <EntityTypeMapping TypeName="CollegeEducatModel.schoolsetup">
-              <MappingFragment StoreEntitySet="schoolsetup">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="schoolname" ColumnName="schoolname" />
-                <ScalarProperty Name="locationaddress" ColumnName="locationaddress" />
-                <ScalarProperty Name="logo" ColumnName="logo" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phoneno" ColumnName="phoneno" />
-                <ScalarProperty Name="currentsession" ColumnName="currentsession" />
-                <ScalarProperty Name="currentterm" ColumnName="currentterm" />
-                <ScalarProperty Name="schoolshortname" ColumnName="schoolshortname" />
-                <ScalarProperty Name="cascore" ColumnName="cascore" />
-                <ScalarProperty Name="examscore" ColumnName="examscore" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="states">
             <EntityTypeMapping TypeName="CollegeEducatModel.state">
               <MappingFragment StoreEntitySet="states">
@@ -836,6 +822,25 @@
               <ScalarProperty Name="Id" ColumnName="subjectid" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="schoolsetups">
+            <EntityTypeMapping TypeName="CollegeEducatModel.schoolsetup">
+              <MappingFragment StoreEntitySet="schoolsetup">
+                <ScalarProperty Name="isOpened" ColumnName="isOpened" />
+                <ScalarProperty Name="nexttimebegins" ColumnName="nexttimebegins" />
+                <ScalarProperty Name="examscore" ColumnName="examscore" />
+                <ScalarProperty Name="cascore" ColumnName="cascore" />
+                <ScalarProperty Name="schoolshortname" ColumnName="schoolshortname" />
+                <ScalarProperty Name="currentterm" ColumnName="currentterm" />
+                <ScalarProperty Name="currentsession" ColumnName="currentsession" />
+                <ScalarProperty Name="phoneno" ColumnName="phoneno" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="locationaddress" ColumnName="locationaddress" />
+                <ScalarProperty Name="schoolname" ColumnName="schoolname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

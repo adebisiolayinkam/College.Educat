@@ -14,7 +14,22 @@ namespace College.Educat.admin
         EducatContext db = new EducatContext();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                var SCH = db.schoolsetups.FirstOrDefault();
+                if (SCH != null)
+                {
+                    SchoolBox.Text = SCH.schoolname;
+                    LocationBox.Text = SCH.locationaddress;
+                    EmailBox.Text = SCH.email;
+                    PhoneBox.Text = SCH.phoneno;
+                    CurrentSessionBox.Text = SCH.currentsession;
+                    DropDownListCurrentTerm.SelectedValue = SCH.currentterm.ToString();
+                    SchoolshortnameBox.Text = SCH.schoolshortname;
+                    CascoreBox.Text = SCH.cascore.ToString();
+                    ExamBox.Text =  SCH.examscore.ToString();
+                }
+            }
         }
 
         private byte[] ImageToByteArray(System.Drawing.Image imageIn)
@@ -90,8 +105,24 @@ namespace College.Educat.admin
 
                 };
 
-
-                db.schoolsetups.Add(sch);
+                var sh = db.schoolsetups.FirstOrDefault();
+                if (sh == null)
+                {
+                    db.schoolsetups.Add(sch);
+                }
+                else
+                {
+                    sh.currentsession = csession;
+                    sh.currentterm = int.Parse(cterm);
+                    sh.cascore = double.Parse(ca);
+                    sh.examscore = double.Parse(exam);
+                    sh.schoolshortname = sshortname;
+                    sh.email = email;
+                    sh.phoneno = phone;
+                    sh.schoolname = sname;
+                    sh.logo = imgbyte;
+                    sh.locationaddress = laddress;
+                }
                 
                 try
                 {

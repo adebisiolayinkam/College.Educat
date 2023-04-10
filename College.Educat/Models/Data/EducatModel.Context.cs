@@ -31,10 +31,10 @@ namespace College.Educat.Models.Data
         public virtual DbSet<currentsession> currentsessions { get; set; }
         public virtual DbSet<grade> grades { get; set; }
         public virtual DbSet<parent> parents { get; set; }
-        public virtual DbSet<schoolsetup> schoolsetups { get; set; }
         public virtual DbSet<state> states { get; set; }
         public virtual DbSet<student> students { get; set; }
         public virtual DbSet<studentsubjectregistrationandresult> studentsubjectregistrationandresults { get; set; }
         public virtual DbSet<subject> subjects { get; set; }
+        public virtual DbSet<schoolsetup> schoolsetups { get; set; }
     }
 }

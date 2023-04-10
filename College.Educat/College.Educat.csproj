@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -210,9 +209,6 @@
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\AddClasses.aspx" />
@@ -225,6 +221,7 @@
     <Content Include="admin\edits.aspx" />
     <Content Include="admin\img\upload2.png" />
     <Content Include="admin\img\uploadimg1.png" />
+    <Content Include="admin\ResultPreview.aspx" />
     <Content Include="admin\ShowParentDetail.aspx" />
     <Content Include="admin\ShowStudentDetails.aspx" />
     <Content Include="admin\ShowSubject.aspx" />
@@ -2044,6 +2041,7 @@
     <Content Include="ReportData\dbs.xsc">
       <DependentUpon>dbs.xsd</DependentUpon>
     </Content>
+    <Content Include="aworan\ShowLogo.ashx" />
     <None Include="ReportData\dbs.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -2147,6 +2145,13 @@
     <Compile Include="admin\edits.aspx.designer.cs">
       <DependentUpon>edits.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\ResultPreview.aspx.cs">
+      <DependentUpon>ResultPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ResultPreview.aspx.designer.cs">
+      <DependentUpon>ResultPreview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\ShowParentDetail.aspx.cs">
       <DependentUpon>ShowParentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2190,6 +2195,9 @@
     </Compile>
     <Compile Include="aworan\aworan.ashx.cs">
       <DependentUpon>aworan.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="aworan\ShowLogo.ashx.cs">
+      <DependentUpon>ShowLogo.ashx</DependentUpon>
     </Compile>
     <Compile Include="College.Master.cs">
       <DependentUpon>College.Master</DependentUpon>
@@ -2441,12 +2449,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

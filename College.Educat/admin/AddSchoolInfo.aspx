@@ -60,7 +60,9 @@ function image_preview(e) {
                 <div class="col-md-4">
                     <div class="form-label-group">
                         <asp:FileUpload ID="FileUpload1" Text="Upload" runat="server" onchange="image_preview(event)" />
-                        <asp:Image ID="Image1" runat="server" BorderColor="Black" Width="120" Height="80" />
+                        <asp:Image ID="Image1" runat="server" BorderColor="Black" Width="120" Height="80"
+                             ImageUrl="~/aworan/ShowLogo.ashx"
+                            />
                         <label for="UploadButton">
                             School Logo                
                         </label>

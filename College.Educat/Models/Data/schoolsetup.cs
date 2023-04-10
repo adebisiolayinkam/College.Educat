@@ -31,6 +31,8 @@ namespace College.Educat.Models.Data
         public string schoolshortname { get; set; }
         public double cascore { get; set; }
         public double examscore { get; set; }
+        public System.DateTime nexttimebegins { get; set; }
+        public bool isOpened { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<currentsession> currentsessions { get; set; }

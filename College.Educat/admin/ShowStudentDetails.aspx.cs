@@ -17,6 +17,7 @@ namespace College.Educat.admin
             if (!IsPostBack)
             {
                 LoadData();
+                PopulateClass();
             }
         }
 
@@ -53,6 +54,18 @@ namespace College.Educat.admin
             }
         }
 
+        public void PopulateClass()
+        {
+            //WORK HOME
+            var Class = from c in db.classes select new { c.Id, c.classname };
+            DropDownListClassID.DataSource = Class.ToList();
+            DropDownListClassID.DataValueField = "Id";
+            DropDownListClassID.DataTextField = "classname";
+            DropDownListClassID.DataBind();
+            DropDownListClassID.Items.Insert(0, "--Select Your classname--");
+
+        }
+
         protected void btnNewStudent_Click(object sender, EventArgs e)
         {
             Response.Redirect("AddStudent");
@@ -62,13 +75,40 @@ namespace College.Educat.admin
         {
             using (EducatContext db = new EducatContext())
             {
-                if (GuadiandphoneBox.Text == "")
-
-                    LoadData();
+                if (IdNumberBox.Text == "")
+                    return;
+                   // LoadData();
                 else
                 {
-                    var query = db.students.Where(x => x.guardianphoneno == this.GuadiandphoneBox.Text).ToList();
-                    this.GridView2.DataSource = query;
+                    //var query = db.students.Where(x => x.guardianphoneno == this.GuadiandphoneBox.Text).ToList();
+                    //this.GridView2.DataSource = query;
+                    //this.GridView2.DataBind();
+                    long.TryParse(IdNumberBox.Text, out long id);
+                    var query = from s in db.students
+                                where s.Id == id
+                                select new StuentView
+                                {
+                                    ArmId = s.armId,
+                                    City = s.city,
+                                    currentclassId = s.currentclassId,
+                                    Currentsession = s.currentsession,
+                                    Currentterm = s.currentterm,
+                                    dob = s.dob,
+                                    Firstname = s.firstname,
+                                    Gender = s.gender,
+                                    Graduated = s.graduated,
+                                    Guardianemail = s.guardianemail,
+                                    Lastname = s.lastname,
+                                    Othername = s.othername,
+                                    Guardiannames = s.guardiannames,
+                                    Guardianphoneno = s.guardianphoneno,
+                                    Homeaddress = s.homeaddress,
+                                    Yearofentry = s.yearofentry,
+                                    Id = s.Id,
+                                    State = s.state,
+                                    Yearofgraduation = s.yearofgraduation
+                                };
+                    this.GridView2.DataSource = query.ToList();
                     this.GridView2.DataBind();
                 }
 
@@ -116,6 +156,39 @@ namespace College.Educat.admin
 
         protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+
+        }
+
+        protected void btnClassSearch_Click(object sender, EventArgs e)
+        {
+            int leave = int.Parse(DropDownListClassID.SelectedValue);
+
+            var query = from s in db.students
+                        where s.currentclassId == leave
+                        select new StuentView
+                        {
+                            ArmId = s.armId,
+                            City = s.city,
+                            currentclassId = s.currentclassId,
+                            Currentsession = s.currentsession,
+                            Currentterm = s.currentterm,
+                            dob = s.dob,
+                            Firstname = s.firstname,
+                            Gender = s.gender,
+                            Graduated = s.graduated,
+                            Guardianemail = s.guardianemail,
+                            Lastname = s.lastname,
+                            Othername = s.othername,
+                            Guardiannames = s.guardiannames,
+                            Guardianphoneno = s.guardianphoneno,
+                            Homeaddress = s.homeaddress,
+                            Yearofentry = s.yearofentry,
+                            Id = s.Id,
+                            State = s.state,
+                            Yearofgraduation = s.yearofgraduation
+                        };
+            this.GridView2.DataSource = query.ToList();
+            this.GridView2.DataBind();
 
         }
     }

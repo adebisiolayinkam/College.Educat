@@ -93,7 +93,7 @@ namespace College.Educat.admin
 
         public void PopulateClass()
         {
-
+            //WORK HOME
             var Class = from c in db.classes select new { c.Id, c.classname };
             DropDownListClassID.DataSource = Class.ToList();
             DropDownListClassID.DataValueField = "Id";

@@ -11,15 +11,22 @@
         <ContentTemplate>
             <div class="box-body">
                 <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <asp:TextBox ID="GuadiandphoneBox" runat="server" CssClass="form-control" placeholder="Search Guadiand phone"></asp:TextBox>
-                        <br />
-                        <span class="form-group">
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-info" OnClick="btnSearch_Click" />
+                    <div class="col-md-3 form-group">
+                        <asp:TextBox ID="IdNumberBox" runat="server" CssClass="form-control" placeholder="Search Identity Number"></asp:TextBox>
+                        </div>
 
-                        </span>
-                    </div>
-                    <div class="col-sm-8 form-group">
+                        <div class="col-md-2 form-group">
+                        <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-info" OnClick="btnSearch_Click" /> 
+                        </div>
+
+                            <div class="col-md-3 form-group">
+                              <asp:DropDownList ID="DropDownListClassID" runat="server" CssClass="form-control"></asp:DropDownList>
+                            </div>
+                         <div class="col-md-2 form-group">
+                        <asp:Button ID="btnClassSearch" runat="server" Text="Search Class" CssClass="btn btn-info" OnClick="btnClassSearch_Click" /> 
+                        </div>
+                      
+                    <div class="col-md-2 form-group">
                         <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="0">
                             <ProgressTemplate>
                                 Please wait...

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\OLAYINKA\Desktop\MC FOLDER\C#\College.Educat\College.Educat\Models\Data\EducatModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ADEBISI_OLAYINKA\Desktop\Olayinka\myProject\SchoolDev\SchoolProject\College.Educat\College.Educat\Models\Data\EducatModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

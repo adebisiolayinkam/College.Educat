@@ -30,7 +30,7 @@ namespace College.Educat.admin
                            {
                              s.subjectname
                            };
-                GridView2.DataSource = sub.ToList().Take(5);
+                GridView2.DataSource = sub.ToList();
                 GridView2.DataBind();
 
             }

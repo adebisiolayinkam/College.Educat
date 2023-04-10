@@ -11,79 +11,70 @@ namespace College.Educat.admin
 {
 
 
-    public partial class ShowStudentDetails
+    public partial class ResultPreview
     {
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// CurrentSessionLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Label CurrentSessionLabel;
 
         /// <summary>
-        /// IdNumberBox control.
+        /// CurrentTermLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdNumberBox;
+        protected global::System.Web.UI.WebControls.Label CurrentTermLabel;
 
         /// <summary>
-        /// btnSearch control.
+        /// DropDownListClassId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListClassId;
 
         /// <summary>
-        /// DropDownListClassID control.
+        /// DropDownListSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListClassID;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListSubject;
 
         /// <summary>
-        /// btnClassSearch control.
+        /// btnshow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClassSearch;
+        protected global::System.Web.UI.WebControls.Button btnshow;
 
         /// <summary>
-        /// UpdateProgress1 control.
+        /// DropDownListArm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListArm;
 
         /// <summary>
-        /// GridView2 control.
+        /// tbScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
-
-        /// <summary>
-        /// btnNewStudent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewStudent;
+        protected global::System.Web.UI.WebControls.GridView tbScore;
     }
 }
