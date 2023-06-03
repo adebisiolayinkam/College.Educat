@@ -8,58 +8,46 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace College.Educat.students
+namespace College.Educat.admin
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class ReportPreview : System.Web.UI.Page
     {
         EducatContext db = new EducatContext();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                //PopulateSubject();
-                PopulateClass();
                 var setting = db.schoolsetups.FirstOrDefault();
                 if (setting == null)
                 {
                     Response.Redirect("AddSchoolInfo");
                 }
                 CurrentSessionLabel.Text = setting.currentsession;
-                
+                CurrentTermLabel.Text = setting.currentterm.ToString();
+                PopulateClass();
             }
         }
-
-        //public void PopulateSubject()
-        //{
-        //    var subj = from s in db.subjects select new { s.Id, s.subjectname };
-        //    DropDownListSubject.DataSource = subj.ToList();
-        //    DropDownListSubject.DataValueField = "Id";
-        //    DropDownListSubject.DataTextField = "subjectname";
-        //    DropDownListSubject.DataBind();
-        //    DropDownListSubject.Items.Insert(0, "--Select Your Subjectname--");
-        //}
-
-                
         public void PopulateClass()
         {
 
             var Class = from c in db.classes select new { c.Id, c.classname };
-            DropDownListClass.DataSource = Class.ToList();
-            DropDownListClass.DataValueField = "Id";
-            DropDownListClass.DataTextField = "classname";
-            DropDownListClass.DataBind();
-            DropDownListClass.Items.Insert(0, "--Select Your classname--");
+            DropDownListClassId.DataSource = Class.ToList();
+            DropDownListClassId.DataValueField = "Id";
+            DropDownListClassId.DataTextField = "classname";
+            DropDownListClassId.DataBind();
+            DropDownListClassId.Items.Insert(0, "--Select Your classname--");
 
         }
 
-
-
+        public int squre(int a, int b)
+        {
+            return a * b;
+        }
 
         protected void Btnshow_Click(object sender, EventArgs e)
         {
-            var id = User.Identity.Name;
-            var selectedStudent = long.Parse(id);
+
+            var selectedStudent = long.Parse(DropDownListStudents.SelectedValue);
             var sstd = from s in db.students
                        where s.Id == selectedStudent
                        let theschool = db.schoolsetups.FirstOrDefault()
@@ -93,11 +81,10 @@ namespace College.Educat.students
             };
 
             rpt.DataSources.Add(reportData);
-            int cterm = int.Parse(sstd.ToList().FirstOrDefault().currentterm);
-            var session = sstd.FirstOrDefault().currentsession;
+            int cterm = int.Parse(CurrentTermLabel.Text);
             var rset = from r in db.studentsubjectregistrationandresults
                        where r.studentid == selectedStudent &&
-                             r.session == session &&
+                             r.session == CurrentSessionLabel.Text &&
                              r.term == cterm
                        select new ResultSet
                        {
@@ -121,11 +108,24 @@ namespace College.Educat.students
             };
             rpt.DataSources.Add(reportData);
 
+            
         }
 
         protected void DropDownListClassId_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int level = int.Parse(DropDownListClassId.SelectedValue);
+            var std = from s in db.students
+                      where s.currentsession == CurrentSessionLabel.Text && s.currentclassId == level
+                      select new
+                      {
+                          s.Id,
+                          Names = s.lastname + " " + s.firstname + " " + s.othername
+                      };
+            DropDownListStudents.DataSource = std.ToList();
+            DropDownListStudents.DataTextField = "Names";
+            DropDownListStudents.DataValueField = "ID";
+            DropDownListStudents.DataBind();
+            DropDownListStudents.Items.Insert(0, "--Select a Student--");
         }
     }
 }

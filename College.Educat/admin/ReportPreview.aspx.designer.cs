@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace College.Educat.students
+namespace College.Educat.admin
 {
 
 
-    public partial class Default
+    public partial class ReportPreview
     {
 
         /// <summary>
@@ -24,31 +24,31 @@ namespace College.Educat.students
         protected global::System.Web.UI.WebControls.Label CurrentSessionLabel;
 
         /// <summary>
-        /// DropDownListTerm control.
+        /// CurrentTermLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListTerm;
+        protected global::System.Web.UI.WebControls.Label CurrentTermLabel;
 
         /// <summary>
-        /// DropDownListClass control.
+        /// DropDownListClassId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListClass;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListClassId;
 
         /// <summary>
-        /// Btncheck control.
+        /// DropDownListStudents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btncheck;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListStudents;
 
         /// <summary>
         /// Btnshow control.

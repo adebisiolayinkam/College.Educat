@@ -41,8 +41,7 @@ namespace College.Educat.admin
             DropDownListArm.Items.Insert(0, "--Select Your Arms--");
 
         }
-
-
+        
         public void PopulateClass()
         {
 
@@ -54,7 +53,6 @@ namespace College.Educat.admin
             DropDownListClassId.Items.Insert(0, "--Select Your classname--");
 
         }
-
 
         public void PopulateSubject()
         {
@@ -68,5 +66,27 @@ namespace College.Educat.admin
 
         }
 
+        protected void btnshow_Click(object sender, EventArgs e)
+        {
+            int classid = int.Parse(DropDownListClassId.SelectedValue);
+            int subjectid = int.Parse(DropDownListSubject.SelectedValue);
+
+            var data = from s in db.students
+                       join sc in db.studentsubjectregistrationandresults on s.Id equals sc.studentid
+                       where s.currentclassId == classid & sc.subjectid==subjectid && sc.session== CurrentSessionLabel.Text
+                       let Total = sc.ca + sc.exam
+                       select new
+                       {
+                           s.Id,
+                           s.firstname,
+                           s.lastname,
+                           s.othername,
+                           sc.ca,
+                           sc.exam,
+                           Total
+                       };
+            tbScore.DataSource = data.ToList();
+            tbScore.DataBind();
+        }
     }
 }
